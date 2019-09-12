@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace euler
@@ -7,7 +8,30 @@ namespace euler
     {
         static void Main(string[] args)
         {
-            E1Sum();
+            E2Fib();
+        }
+
+        private static void E2Fib()
+        {
+            {
+                //Brute force
+                var limit = 4000000;
+                //Set first 2 elements to 1 which is not even so needs not to be included in the sum
+                var fibPrev = 1;
+                var fibPrevPrev = 1;
+                var sum = 0;
+                var last = 0;
+                while (true)
+                {
+                    last = fibPrev + fibPrevPrev;
+                    if (last > limit)break;
+                    fibPrevPrev = fibPrev;
+                    fibPrev = last;
+                    if (last % 2 == 0)sum += last;
+                }
+                Console.WriteLine(sum);
+            }
+            //Only every third member is even, but i need the two odd members before to compute it...
         }
 
         private static void E1Sum()
