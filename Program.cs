@@ -8,7 +8,38 @@ namespace euler
     {
         static void Main(string[] args)
         {
-            E3Prime();
+            E4Palindrome();
+        }
+
+        private static void E4Palindrome()
+        {
+            //Brute force
+            {
+                //could be done more easily via num.tostring
+                bool isPalindrome(int num)
+                {
+                    var digits = (int)(Math.Log10(num) + 1);
+                    for (int i = 0; i < digits / 2; i++)
+                    {
+                        var first = num / (int)Math.Pow(10, digits - 1 - i) % 10;
+                        var second = num % (int)Math.Pow(10, i + 1) / (int)Math.Pow(10, i);
+                        if (first != second)return false;
+                    }
+                    return true;
+                }
+                var digitsLimit = 3;
+                var max = 0;
+                var start = (int)Math.Pow(10, digitsLimit - 1);
+                var limit = (int)Math.Pow(10, digitsLimit);
+                for (int a = start; a < limit; a++)
+                    for (int b = a; b < limit; b++)
+                    {
+                        var num = a * b;
+                        if (num > max && isPalindrome(num))
+                            max = num;
+                    }
+                Console.WriteLine(max);
+            }
         }
 
         private static void E3Prime()
