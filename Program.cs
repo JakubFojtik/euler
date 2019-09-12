@@ -22,7 +22,7 @@ namespace euler
                     for (int i = 0; i < digits / 2; i++)
                     {
                         var first = num / (int)Math.Pow(10, digits - 1 - i) % 10;
-                        var second = num % (int)Math.Pow(10, i + 1) / (int)Math.Pow(10, i);
+                        var second = num / (int)Math.Pow(10, i) % 10;
                         if (first != second)return false;
                     }
                     return true;
