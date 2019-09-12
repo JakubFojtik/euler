@@ -7,9 +7,7 @@ namespace euler
     class Program
     {
         static void Main(string[] args)
-        {
-            E2Fib();
-        }
+        { }
 
         private static void E2Fib()
         {
