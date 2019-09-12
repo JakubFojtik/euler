@@ -16,7 +16,7 @@ namespace euler
             {
                 //Brute force
                 var limit = 4000000;
-                //Set first 2 elements to 1 which is not even so needs not to be included in the sum
+                //Set first 2 elements to 1 which is not even so does not need to be included in the sum
                 var fibPrev = 1;
                 var fibPrevPrev = 1;
                 var sum = 0;
@@ -31,7 +31,25 @@ namespace euler
                 }
                 Console.WriteLine(sum);
             }
-            //Only every third member is even, but i need the two odd members before to compute it...
+            {
+                //Only even members are computed
+                //Seems that fib(n) = 4 * fib(n-3) + fib(n-6)
+                var limit = 4000000;
+                //Set first 2 even elements and include them in the sum
+                var fibPrev = 2;
+                var fibPrevPrev = 0;
+                var sum = fibPrev + fibPrevPrev;
+                var last = 0;
+                while (true)
+                {
+                    last = 4 * fibPrev + fibPrevPrev;
+                    if (last > limit)break;
+                    fibPrevPrev = fibPrev;
+                    fibPrev = last;
+                    if (last % 2 == 0)sum += last;
+                }
+                Console.WriteLine(sum);
+            }
         }
 
         private static void E1Sum()
