@@ -7,7 +7,31 @@ namespace euler
     class Program
     {
         static void Main(string[] args)
-        { }
+        {
+            E3Prime();
+        }
+
+        private static void E3Prime()
+        {
+            {
+                //Brute force
+                var num = 600851475143;
+                var divisors = new List<int>();
+                var div = 2;
+                while (num > 1)
+                {
+                    while (num % div == 0)
+                    {
+                        num /= div;
+                        divisors.Add(div);
+                    }
+                    div++;
+                }
+                Console.WriteLine(string.Join(", ", divisors));
+                Console.WriteLine(divisors.Last());
+            }
+            //Eratosthen's sieve
+        }
 
         private static void E2Fib()
         {
