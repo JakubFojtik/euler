@@ -8,6 +8,9 @@ namespace euler
     {
         static void Main(string[] args)
         {
+            E1Sum();
+            E2Fib();
+            E3Prime();
             E4Palindrome();
         }
 
@@ -18,19 +21,19 @@ namespace euler
                 //could be done more easily via num.tostring
                 bool isPalindrome(int num)
                 {
-                    var digits = (int)(Math.Log10(num) + 1);
+                    var digits = (int) (Math.Log10(num) + 1);
                     for (int i = 0; i < digits / 2; i++)
                     {
-                        var first = num / (int)Math.Pow(10, digits - 1 - i) % 10;
-                        var second = num / (int)Math.Pow(10, i) % 10;
-                        if (first != second)return false;
+                        var first = num / (int) Math.Pow(10, digits - 1 - i) % 10;
+                        var second = num / (int) Math.Pow(10, i) % 10;
+                        if (first != second) return false;
                     }
                     return true;
                 }
                 var digitsLimit = 3;
                 var max = 0;
-                var start = (int)Math.Pow(10, digitsLimit - 1);
-                var limit = (int)Math.Pow(10, digitsLimit);
+                var start = (int) Math.Pow(10, digitsLimit - 1);
+                var limit = (int) Math.Pow(10, digitsLimit);
                 for (int a = start; a < limit; a++)
                     for (int b = a; b < limit; b++)
                     {
@@ -66,9 +69,9 @@ namespace euler
 
         private static void E2Fib()
         {
+            var limit = 4000000;
             {
                 //Brute force
-                var limit = 4000000;
                 //Set first 2 elements to 1 which is not even so does not need to be included in the sum
                 var fibPrev = 1;
                 var fibPrevPrev = 1;
@@ -77,17 +80,16 @@ namespace euler
                 while (true)
                 {
                     last = fibPrev + fibPrevPrev;
-                    if (last > limit)break;
+                    if (last > limit) break;
                     fibPrevPrev = fibPrev;
                     fibPrev = last;
-                    if (last % 2 == 0)sum += last;
+                    if (last % 2 == 0) sum += last;
                 }
                 Console.WriteLine(sum);
             }
             {
                 //Only even members are computed
                 //Seems that fib(n) = 4 * fib(n-3) + fib(n-6)
-                var limit = 4000000;
                 //Set first 2 even elements and include them in the sum
                 var fibPrev = 2;
                 var fibPrevPrev = 0;
@@ -96,10 +98,10 @@ namespace euler
                 while (true)
                 {
                     last = 4 * fibPrev + fibPrevPrev;
-                    if (last > limit)break;
+                    if (last > limit) break;
                     fibPrevPrev = fibPrev;
                     fibPrev = last;
-                    if (last % 2 == 0)sum += last;
+                    if (last % 2 == 0) sum += last;
                 }
                 Console.WriteLine(sum);
             }
@@ -107,19 +109,20 @@ namespace euler
 
         private static void E1Sum()
         {
+            var limit = 1000;
             {
                 //Brute force
-                var numbers = Enumerable.Range(1, 1000);
+                var numbers = Enumerable.Range(1, limit - 1);
                 var sum = (from k in numbers where k % 3 == 0 || k % 5 == 0 select k)
                     .Sum();
                 Console.WriteLine(sum);
             }
             {
                 //Constant-time
-                var limit = 1000;
+                var max = limit - 1;
                 int sumTo(int n) => n * (n + 1) / 2;
                 int sumDivisors(int n, int div) => sumTo(n / div) * div;
-                var sum = sumDivisors(limit, 3) + sumDivisors(limit, 5) - sumDivisors(limit, 15);
+                var sum = sumDivisors(max, 3) + sumDivisors(max, 5) - sumDivisors(max, 15);
                 Console.WriteLine(sum);
             }
         }
