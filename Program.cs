@@ -101,7 +101,7 @@ namespace euler
                     if (last > limit) break;
                     fibPrevPrev = fibPrev;
                     fibPrev = last;
-                    if (last % 2 == 0) sum += last;
+                    sum += last;
                 }
                 Console.WriteLine(sum);
             }
